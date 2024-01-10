@@ -1,6 +1,6 @@
 #include <jm/parsers/proc_meminfo.h>
 #include <jm/utils.h>
-#include <jm/paths.h>
+#include <jm/files.h>
 
 #include <fstream>
 #include <ranges>

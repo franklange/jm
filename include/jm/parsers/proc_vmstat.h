@@ -1,6 +1,6 @@
 #pragma once
 
-#include <jm/paths.h>
+#include <jm/files.h>
 #include <jm/types.h>
 
 #include <istream>
