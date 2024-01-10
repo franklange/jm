@@ -5,6 +5,7 @@
 namespace jm::proc {
 
 constexpr auto kMemInfo{"/proc/meminfo"};
+constexpr auto kVmStat{"/proc/vmstat"};
 
 } // namespace jm
 

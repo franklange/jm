@@ -1,14 +1,23 @@
-#include <jm/parsers/proc_meminfo.h>
+#include <jm/parsers/proc_vmstat.h>
 #include <jm/utils.h>
 
 #include <fstream>
 #include <ranges>
 #include <stdexcept>
-#include <string>
 
 namespace jm::proc {
 
-auto meminfo(std::istream& stream) -> Json
+auto vmstat(const Path& path) -> Json
+{
+    std::ifstream file{path};
+
+    if (!file.is_open())
+        throw std::runtime_error{"[ERR] vmstat info"};
+
+    return vmstat(file);
+}
+
+auto vmstat(std::istream& stream) -> Json
 {
     using namespace std::views;
 
@@ -19,16 +28,6 @@ auto meminfo(std::istream& stream) -> Json
         res.merge_patch(std::move(entry));
 
     return res;
-}
-
-auto meminfo(const Path& path) -> Json
-{
-    std::ifstream file{path};
-
-    if (!file.is_open())
-        throw std::runtime_error{"[ERR] meminfo open"};
-
-    return meminfo(file);
 }
 
 } // namespace jm::proc

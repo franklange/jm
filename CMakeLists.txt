@@ -22,10 +22,12 @@ target_sources(${PROJECT_NAME} PRIVATE
     include/jm/paths.h
     include/jm/json.h
     include/jm/parsers/proc_meminfo.h
+    include/jm/parsers/proc_vmstat.h
 
     src/utils.cpp
     src/json.cpp
     src/proc_meminfo.cpp
+    src/proc_vmstat.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)

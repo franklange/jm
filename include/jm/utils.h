@@ -15,4 +15,6 @@ auto remove_colon(const std::string&) -> std::string;
 auto read_lines(const Path&) -> std::vector<std::string>;
 auto read_lines(std::istream&) -> std::vector<std::string>;
 
+auto parse_kv(const std::string&) -> Json;
+
 } // namespace jm

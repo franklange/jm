@@ -1,6 +1,7 @@
 #include <jm/utils.h>
 
 #include <algorithm>
+#include <cstdio>
 #include <fstream>
 #include <iterator>
 #include <stdexcept>
@@ -45,6 +46,15 @@ auto replace(const std::string& s, const char o, const char n) -> std::string
 auto remove_colon(const std::string& s) -> std::string
 {
     return replace(s, ':', ' ');
+}
+
+auto parse_kv(const std::string& s) -> Json
+{
+    char key[256] = {};
+    std::uint64_t value{0};
+
+    std::sscanf(s.c_str(), "%255s %u", key, &value);
+    return {{key, value}};
 }
 
 } // namespace jm
