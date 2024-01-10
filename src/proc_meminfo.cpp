@@ -9,9 +9,14 @@
 
 namespace jm::proc {
 
-auto meminfo() -> Json
+auto meminfo(const Path& path) -> Json
 {
-    return meminfo(kMemInfo);
+    std::ifstream file{path};
+
+    if (!file.is_open())
+        throw std::runtime_error{"[ERR] meminfo open"};
+
+    return meminfo(file);
 }
 
 auto meminfo(std::istream& stream) -> Json
@@ -25,16 +30,6 @@ auto meminfo(std::istream& stream) -> Json
         res.merge_patch(std::move(entry));
 
     return res;
-}
-
-auto meminfo(const Path& path) -> Json
-{
-    std::ifstream file{path};
-
-    if (!file.is_open())
-        throw std::runtime_error{"[ERR] meminfo open"};
-
-    return meminfo(file);
 }
 
 } // namespace jm::proc

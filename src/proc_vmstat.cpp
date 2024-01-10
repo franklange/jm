@@ -12,7 +12,7 @@ auto vmstat(const Path& path) -> Json
     std::ifstream file{path};
 
     if (!file.is_open())
-        throw std::runtime_error{"[ERR] vmstat info"};
+        throw std::runtime_error{"[ERR] vmstat open"};
 
     return vmstat(file);
 }
