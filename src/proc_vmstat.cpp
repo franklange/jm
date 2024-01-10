@@ -24,7 +24,7 @@ auto vmstat(std::istream& stream) -> Json
     Json res;
     auto lines = read_lines(stream);
 
-    for (auto entry : lines | transform(remove_colon) | transform(parse_kv))
+    for (auto entry : lines | transform(rm_colon) | transform(parse_kv))
         res.merge_patch(std::move(entry));
 
     return res;

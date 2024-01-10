@@ -1,22 +1,9 @@
-#include <jm/parsers/proc_meminfo.h>
+#include <jm/parsers/cgroup_memory_pressure.h>
 
 auto main() -> int
 {
-    const auto json = jm::proc::meminfo();
+    const auto json = jm::cgroup::memory_pressure_all();
     jm::pprint(json);
 
     return 0;
 }
-/* prints:
-
-{
-  "Active": 2981984,
-  "Active(anon)": 1960176,
-  "Active(file)": 1021808,
-  "AnonHugePages": 403456,
-  "AnonPages": 1783632,
-  "Bounce": 0,
-  "Buffers": 56712,
-  "Cached": 1557324,
-  ...
-*/

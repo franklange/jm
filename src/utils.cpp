@@ -46,9 +46,14 @@ auto replace(const std::string& s, const char o, const char n) -> std::string
     return res;
 }
 
-auto remove_colon(const std::string& s) -> std::string
+auto rm_colon(const std::string& s) -> std::string
 {
     return replace(s, ':', ' ');
+}
+
+auto rm_equal(const std::string& s) -> std::string
+{
+    return replace(s, '=', ' ');
 }
 
 auto parse_kv(const std::string& s) -> Json
@@ -58,6 +63,11 @@ auto parse_kv(const std::string& s) -> Json
     std::sscanf(s.c_str(), "%255s %u", key, &value);
 
     return {{key, value}};
+}
+
+auto dir_name(const DirEntry& e) -> std::string
+{
+    return e.path().filename().string();
 }
 
 } // namespace jm

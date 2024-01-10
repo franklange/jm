@@ -19,19 +19,21 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 target_sources(${PROJECT_NAME} PRIVATE
     include/jm/types.h
     include/jm/utils.h
-    include/jm/paths.h
+    include/jm/files.h
     include/jm/json.h
     include/jm/parsers/proc_meminfo.h
     include/jm/parsers/proc_vmstat.h
+    include/jm/parsers/cgroup_memory_pressure.h
 
     src/utils.cpp
     src/json.cpp
     src/proc_meminfo.cpp
     src/proc_vmstat.cpp
+    src/cgroup_memory_pressure.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
     nlohmann_json::nlohmann_json
