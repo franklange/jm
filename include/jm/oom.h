@@ -4,7 +4,7 @@
 
 namespace jm::oom {
 
-auto hitlist() -> Json;
-auto hitlist(const std::string& cgroup) -> Json;
+auto hitlist_global() -> Json;
+auto hitlist_cgroup(const std::string&) -> Json;
 
 } // namespace jm::oom

@@ -3,7 +3,7 @@ C++20 library to parse Linux proc and cgroup data as JSON.
 
 ### Dependencies
 * nlohmann::json
-* Linux `/proc` and `/sys/fs/cgroup` mounted
+* Linux `/proc` and `/sys/fs/cgroup` readable
 
 ### Proc Example
 `jm::proc` contains a collection of parsers for specific `/proc` files  
@@ -75,15 +75,16 @@ auto main() -> int
 
 ### OOM Hitlist Example
 
-The `jm::oom::hitlist()` collects a descending list of pids based on ` /proc/<pid>/oom_score`,  
-either system-wide (no arg) or per cgroup if specified.
+`jm::oom::hitlist_*` collects a sorted list of pids based on ` /proc/<pid>/oom_score`,  
+either system-wide or per cgroup if specified. Higher score means the process is more likely  
+to be killed by the kernel in an OOM scenario.
 
 ```c++
 #include <jm/oom.h>
 
 auto main() -> int
 {
-    const auto l = jm::oom::hitlist();
+    const auto l = jm::oom::hitlist_cgroup("user.slice");
     jm::pprint(l);
 
     return 0;

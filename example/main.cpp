@@ -2,7 +2,7 @@
 
 auto main() -> int
 {
-    const auto l = jm::oom::hitlist();
+    const auto l = jm::oom::hitlist_cgroup("user.slice");
     jm::pprint(l);
 
     return 0;

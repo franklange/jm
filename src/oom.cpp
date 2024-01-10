@@ -33,9 +33,9 @@ static auto is_dir(const DirEntry& d) -> bool
     return d.is_directory();
 }
 
-auto hitlist() -> Json
+auto hitlist_global() -> Json
 {
-    Json res;
+    Json res = Json::array();
     for (const auto& e : DirIter{proc::kRoot} | std::views::filter(is_dir))
     {
         const auto dirName = util::dir_name(e);
@@ -55,9 +55,9 @@ auto hitlist() -> Json
     return res;
 }
 
-auto hitlist(const std::string& cgroup) -> Json
+auto hitlist_cgroup(const std::string& cgroup) -> Json
 {
-    Json res;
+    Json res = Json::array();
     const auto pids = read_pids(cgroup);
 
     for (const auto& pid : pids)
