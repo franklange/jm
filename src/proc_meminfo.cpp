@@ -24,9 +24,9 @@ auto meminfo(std::istream& stream) -> Json
     using namespace std::views;
 
     Json res;
-    const auto lines = read_lines(stream);
+    const auto lines = util::read_lines(stream);
 
-    for (auto entry : lines | transform(rm_colon) | transform(parse_kv))
+    for (auto entry : lines | transform(util::rm_colon) | transform(util::parse_kv))
         res.merge_patch(std::move(entry));
 
     return res;

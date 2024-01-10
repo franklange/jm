@@ -40,9 +40,9 @@ auto memory_pressure(std::istream& stream) -> Json
     using namespace std::views;
 
     Json res;
-    auto lines = read_lines(stream);
+    auto lines = util::read_lines(stream);
 
-    for (auto e : lines | transform(rm_equal) | transform(parse))
+    for (auto e : lines | transform(util::rm_equal) | transform(parse))
         res.merge_patch(std::move(e));
 
     return res;
@@ -83,7 +83,7 @@ auto memory_pressure_all() -> Json
         if (!e.is_directory())
             continue;
 
-        res.merge_patch({{dir_name(e), memory_pressure(e.path() / kMemoryPressure)}});
+        res.merge_patch({{util::dir_name(e), memory_pressure(e.path() / kMemoryPressure)}});
     }
 
     return res;

@@ -6,9 +6,8 @@
 #include <vector>
 #include <string>
 
-namespace jm {
+namespace jm::util {
 
-auto split(const std::string&) -> std::vector<std::string>;
 auto replace(const std::string&, char o, char n) -> std::string;
 auto rm_colon(const std::string&) -> std::string;
 auto rm_equal(const std::string&) -> std::string;
@@ -22,4 +21,4 @@ auto parse_kv(const std::string&) -> Json;
 auto dir_name(const DirEntry&) -> std::string;
 auto is_num(const std::string&) -> bool;
 
-} // namespace jm
+} // namespace jm::util

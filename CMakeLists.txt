@@ -43,6 +43,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 if (JM_TESTS)
     enable_testing()
+
+    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+        add_compile_options(-Wall -Wextra -pedantic)
+    endif ()
+
     add_subdirectory(test)
 endif()
 

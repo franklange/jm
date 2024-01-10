@@ -8,11 +8,11 @@
 #include <sstream>
 #include <utility>
 
-namespace jm {
+namespace jm::util {
 
 auto read_lines(const Path& path) -> std::vector<std::string>
 {
-    std::ifstream file{path, std::ios::in};
+    std::ifstream file{path};
 
     if (!file.is_open())
         throw std::runtime_error{"[ERR] file open " + path.string()};
@@ -29,14 +29,6 @@ auto read_lines(std::istream& stream) -> std::vector<std::string>
         res.push_back(std::move(line));
 
     return res;
-}
-
-auto split(const std::string& words) -> std::vector<std::string>
-{
-    std::istringstream s{words};
-
-    return {std::istream_iterator<std::string>{s},
-            std::istream_iterator<std::string>()};
 }
 
 auto replace(const std::string& s, const char o, const char n) -> std::string
@@ -81,4 +73,4 @@ auto is_num(const std::string& s) -> bool
     return std::all_of(s.begin(), s.end(), isdigit);
 }
 
-} // namespace jm
+} // namespace jm::util
