@@ -1,5 +1,6 @@
 #include <jm/utils.h>
 
+#include <algorithm>
 #include <cstdio>
 #include <fstream>
 #include <iterator>
@@ -56,6 +57,11 @@ auto rm_equal(const std::string& s) -> std::string
     return replace(s, '=', ' ');
 }
 
+auto parse_v(const std::string& s) -> Json
+{
+    return std::stoull(s);
+}
+
 auto parse_kv(const std::string& s) -> Json
 {
     char key[256] = {};
@@ -68,6 +74,11 @@ auto parse_kv(const std::string& s) -> Json
 auto dir_name(const DirEntry& e) -> std::string
 {
     return e.path().filename().string();
+}
+
+auto is_num(const std::string& s) -> bool
+{
+    return std::all_of(s.begin(), s.end(), isdigit);
 }
 
 } // namespace jm

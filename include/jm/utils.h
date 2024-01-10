@@ -16,8 +16,10 @@ auto rm_equal(const std::string&) -> std::string;
 auto read_lines(const Path&) -> std::vector<std::string>;
 auto read_lines(std::istream&) -> std::vector<std::string>;
 
+auto parse_v(const std::string&) -> Json;
 auto parse_kv(const std::string&) -> Json;
 
 auto dir_name(const DirEntry&) -> std::string;
+auto is_num(const std::string&) -> bool;
 
 } // namespace jm

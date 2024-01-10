@@ -1,9 +1,9 @@
-#include <jm/parsers/cgroup_memory_pressure.h>
+#include <jm/oom.h>
 
 auto main() -> int
 {
-    const auto json = jm::cgroup::memory_pressure_all();
-    jm::pprint(json);
+    const auto l = jm::oom::hitlist();
+    jm::pprint(l);
 
     return 0;
 }

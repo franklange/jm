@@ -1,11 +1,13 @@
 # jm
-C++23 library to parse Linux proc and cgroup data as JSON.
+C++20 library to parse Linux proc and cgroup data as JSON.
 
 ### Dependencies
 * nlohmann::json
 * Linux `/proc` and `/sys/fs/cgroup` mounted
 
-### proc example
+### Proc Example
+`jm::proc` contains a collection of parsers for specific `/proc` files  
+(see `include/jm/parsers/proc_*`).
 ```c++
 #include <jm/parsers/proc_meminfo.h>
 
@@ -30,7 +32,9 @@ auto main() -> int
 */
 ```
 
-### cgroups example
+### Cgroups Example
+`jm::cgroup` contains a collection of parsers for specific cgroup files under `/sys/fs/cgroup`  
+(see `include/jm/parsers/cgroup_*`).
 ```c++
 #include <jm/parsers/cgroup_memory_pressure.h>
 
@@ -43,7 +47,7 @@ auto main() -> int
 }
 /* prints:
 {
-  "/": {
+  "user.slice": {
     "full": {
       "avg10": 0.0,
       "avg300": 0.0,
@@ -57,7 +61,7 @@ auto main() -> int
       "total": 1
     }
   },
-  "user.slice": {
+  "/": {
     "full": {
       "avg10": 0.0,
       "avg300": 0.0,
@@ -65,6 +69,40 @@ auto main() -> int
       "total": 0
     },
 ...
+*/
+
+```
+
+### OOM Hitlist Example
+
+The `jm::oom::hitlist()` collects a descending list of pids based on ` /proc/<pid>/oom_score`,  
+either system-wide (no arg) or per cgroup if specified.
+
+```c++
+#include <jm/oom.h>
+
+auto main() -> int
+{
+    const auto l = jm::oom::hitlist();
+    jm::pprint(l);
+
+    return 0;
+}
+/* prints:
+[
+  {
+    "pid": 1172,
+    "score": 880
+  },
+
+    "pid": 945,
+    "score": 870
+  },
+  {
+    "pid": 1101,
+    "score": 869
+  },
+  ...
 */
 
 ```

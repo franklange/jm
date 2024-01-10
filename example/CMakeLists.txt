@@ -1,4 +1,4 @@
-project(template_example)
+project(jm_example)
 
 add_executable(${PROJECT_NAME} main.cpp)
 

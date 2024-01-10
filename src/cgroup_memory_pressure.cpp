@@ -64,13 +64,13 @@ auto memory_pressure_root() -> Json
     return memory_pressure(root / kMemoryPressure);
 }
 
-auto memory_pressure(const std::string& name) -> Json
+auto memory_pressure(const std::string& cgroup) -> Json
 {
-    if (name == "/")
+    if (cgroup == "/")
         return memory_pressure_root();
 
     const Path root{cgroup::kRoot};
-    return memory_pressure(root / name / kMemoryPressure);
+    return memory_pressure(root / cgroup / kMemoryPressure);
 }
 
 auto memory_pressure_all() -> Json
