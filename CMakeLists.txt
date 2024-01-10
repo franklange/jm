@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(proc_json)
+project(jm)
 
 find_package(nlohmann_json REQUIRED)
 
-option(PROC_JSON_TESTS "Enable Tests" OFF)
-option(PROC_JSON_EXAMPLES "Enable Examples" OFF)
+option(JM_TESTS "Enable Tests" OFF)
+option(JM_EXAMPLES "Enable Examples" OFF)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build Type" FORCE)
@@ -17,9 +17,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 target_sources(${PROJECT_NAME} PRIVATE
-    include/proc_json/utils.h
+    include/jm/types.h
+    include/jm/utils.h
+    include/jm/paths.h
+    include/jm/json.h
+    include/jm/parsers/proc_meminfo.h
 
     src/utils.cpp
+    src/json.cpp
+    src/proc_meminfo.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
@@ -29,11 +35,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     nlohmann_json::nlohmann_json
 )
 
-if (PROC_JSON_TESTS)
+if (JM_TESTS)
     enable_testing()
     add_subdirectory(test)
 endif()
 
-if (PROC_JSON_EXAMPLES)
+if (JM_EXAMPLES)
     add_subdirectory(example)
 endif()

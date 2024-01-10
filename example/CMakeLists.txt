@@ -7,4 +7,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
-target_link_libraries(${PROJECT_NAME} PRIVATE proc_json)
+target_link_libraries(${PROJECT_NAME} PRIVATE jm)
