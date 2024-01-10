@@ -1,5 +1,6 @@
 #include <jm/parsers/proc_meminfo.h>
 #include <jm/utils.h>
+#include <jm/paths.h>
 
 #include <fstream>
 #include <ranges>
@@ -7,6 +8,11 @@
 #include <string>
 
 namespace jm::proc {
+
+auto meminfo() -> Json
+{
+    return meminfo(kMemInfo);
+}
 
 auto meminfo(std::istream& stream) -> Json
 {

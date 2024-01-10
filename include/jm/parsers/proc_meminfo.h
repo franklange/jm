@@ -6,6 +6,7 @@
 
 namespace jm::proc {
 
+auto meminfo() -> Json;
 auto meminfo(const Path&) -> Json;
 auto meminfo(std::istream&) -> Json;
 
