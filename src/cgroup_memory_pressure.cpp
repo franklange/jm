@@ -4,8 +4,7 @@
 
 #include <fstream>
 #include <ranges>
-
-#include <iostream>
+#include <stdexcept>
 
 namespace jm::cgroup {
 
@@ -22,8 +21,11 @@ static auto parse(const std::string& s) -> Json
     double a300{0.0};
     std::uint64_t tcount{0};
 
-    std::sscanf(s.c_str(), "%8s %8s %lf %8s %lf %8s %lf %8s %u",
+    const auto ret = std::sscanf(s.c_str(), "%8s %8s %lf %8s %lf %8s %lf %8s %u",
         window, avg10, &a10, avg60, &a60, avg300, &a300, total, &tcount);
+
+    if (ret != 9)
+        throw std::runtime_error{"[ERR] memory.pressure format"};
 
     return {
         {window, {
@@ -41,6 +43,9 @@ auto memory_pressure(std::istream& stream) -> Json
 
     Json res;
     auto lines = util::read_lines(stream);
+
+    if (lines.empty())
+        throw std::runtime_error{"[ERR] memory pressure empty"};
 
     for (auto e : lines | transform(util::rm_equal) | transform(parse))
         res.merge_patch(std::move(e));
@@ -75,7 +80,7 @@ auto memory_pressure(const std::string& cgroup) -> Json
 
 auto memory_pressure_all() -> Json
 {
-    Json res;
+    Json res = Json::object();
     res.merge_patch({{"/", memory_pressure_root()}});
 
     for (const auto& e : DirIter{cgroup::kRoot})

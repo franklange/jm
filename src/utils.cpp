@@ -58,7 +58,9 @@ auto parse_kv(const std::string& s) -> Json
 {
     char key[256] = {};
     std::uint64_t value{0};
-    std::sscanf(s.c_str(), "%255s %u", key, &value);
+    const auto ret = std::sscanf(s.c_str(), "%255s %u", key, &value);
+    if (ret != 2)
+        throw std::runtime_error{"[ERR] parse k/v"};
 
     return {{key, value}};
 }

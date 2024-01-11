@@ -1,22 +1,27 @@
-project(template_test)
+project(jm_test)
 
 find_package(GTest REQUIRED)
 include(GoogleTest)
 
-# add_executable(${PROJECT_NAME} "")
+add_executable(${PROJECT_NAME} "")
 
-# set_target_properties(${PROJECT_NAME} PROPERTIES
-#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/tests"
-# )
-# target_sources(${PROJECT_NAME} PRIVATE
-#     template_TEST.cpp
-# )
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    OUTPUT_NAME "tests"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/test"
+)
+target_sources(${PROJECT_NAME} PRIVATE
+    proc_meminfo_TEST.cpp
+    proc_vmstat_TEST.cpp
 
-# target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+    cgroup_memory_pressure_TEST.cpp
+)
 
-# target_link_libraries(${PROJECT_NAME} PRIVATE
-#     template
-#     GTest::Main
-# )
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 
-# gtest_discover_tests(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    jm
+    GTest::Main
+)
+
+gtest_discover_tests(${PROJECT_NAME})
+

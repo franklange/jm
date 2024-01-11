@@ -26,6 +26,9 @@ auto meminfo(std::istream& stream) -> Json
     Json res;
     const auto lines = util::read_lines(stream);
 
+    if (lines.empty())
+        throw std::runtime_error{"[ERR] meminfo empty"};
+
     for (auto entry : lines | transform(util::rm_colon) | transform(util::parse_kv))
         res.merge_patch(std::move(entry));
 
