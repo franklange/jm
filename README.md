@@ -9,7 +9,7 @@ C++20 library to parse Linux proc and cgroup data as JSON.
 `jm::proc` contains a collection of parsers for specific `/proc` files  
 (see `include/jm/parsers/proc_*`).
 ```c++
-#include <jm/parsers/proc_meminfo.h>
+#include <jm/jm.h>
 
 auto main() -> int
 {
@@ -36,7 +36,7 @@ auto main() -> int
 `jm::cgroup` contains a collection of parsers for specific cgroup files under `/sys/fs/cgroup`  
 (see `include/jm/parsers/cgroup_*`).
 ```c++
-#include <jm/parsers/cgroup_memory_pressure.h>
+#include <jm/jm.h>
 
 auto main() -> int
 {
@@ -80,7 +80,7 @@ either system-wide or per cgroup if specified. Higher score means the process is
 to be killed by the kernel in an OOM scenario.
 
 ```c++
-#include <jm/oom.h>
+#include <jm/jm.h>
 
 auto main() -> int
 {
@@ -106,4 +106,19 @@ auto main() -> int
   ...
 */
 
+```
+
+### Build
+```bash
+cd jm
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Debug -DJM_TESTS=ON -DJM_EXAMPLES=ON ..
+cmake --build . -j
+
+# run tests
+ctest -n # or ./bin/tests
+
+# run example
+./bin/example
 ```

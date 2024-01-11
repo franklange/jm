@@ -7,7 +7,7 @@ add_executable(${PROJECT_NAME} "")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME "tests"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/test"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/"
 )
 target_sources(${PROJECT_NAME} PRIVATE
     proc_meminfo_TEST.cpp

@@ -1,8 +1,8 @@
-#include <jm/oom.h>
+#include <jm/jm.h>
 
 auto main() -> int
 {
-    const auto l = jm::oom::hitlist_cgroup("user.slice");
+    const auto l = jm::proc::meminfo();
     jm::pprint(l);
 
     return 0;

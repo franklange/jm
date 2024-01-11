@@ -18,6 +18,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_sources(${PROJECT_NAME} PRIVATE
     include/jm/files.h
+    include/jm/jm.h
     include/jm/json.h
     include/jm/oom.h
     include/jm/parsers/cgroup_memory_pressure.h
